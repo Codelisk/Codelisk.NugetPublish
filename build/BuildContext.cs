@@ -37,7 +37,7 @@ public class BuildContext : FrostingContext
     public string GitHubSecretToken => this.ArgumentOrEnvironment<string>("GITHUB_TOKEN");
     public string OperatingSystemString => this.Environment.Platform.Family == PlatformFamily.Windows ? "WINDOWS_NT" : "MAC";
     public string MsBuildConfiguration => this.ArgumentOrEnvironment("configuration", Constants.DefaultBuildConfiguration);
-    public string NugetApiKey => this.ArgumentOrEnvironment<string>("NUGETAPIKEY");
+    public string NugetApiKey => this.ArgumentOrEnvironment<string>("NugetApiKey");
     public bool AllowNugetUploadFailures => this.ArgumentOrEnvironment("AllowNugetUploadFailures", false);
     public GitBranch Branch { get; }
 
