@@ -15,7 +15,7 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
 
     public override bool ShouldRun(BuildContext context)
     {
-        var result = context.IsNugetDeployBranch && context.IsRunningInCI;
+        var result = context.IsRunningInCI;
         if (result && String.IsNullOrWhiteSpace(context.NugetApiKey))
             throw new ArgumentException("NugetApiKey is missing");
 
@@ -32,7 +32,7 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
             SkipDuplicate = true
         };
 
-        var packages = context.GetFiles("src/**/*.nupkg");
+        var packages = context.GetFiles("../../../src/**/*.nupkg");
         foreach (var package in packages)
         {
             //try
