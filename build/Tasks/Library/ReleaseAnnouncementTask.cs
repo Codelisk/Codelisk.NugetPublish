@@ -9,7 +9,7 @@ using Tweetinvi;
 namespace Codelisk.NugetPublish.Tasks.Library;
 
 
-[IsDependentOn(typeof(NugetDeployTask))]
+//[IsDependentOn(typeof(NugetDeployTask))]
 public class ReleaseAnnouncementTask : AsyncFrostingTask<BuildContext>
 {
     // const string DocLink = "https://shinylib.net/release-notes/mobile/";
