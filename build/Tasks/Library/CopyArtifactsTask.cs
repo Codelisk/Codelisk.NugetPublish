@@ -15,7 +15,7 @@ public class CopyArtifactsTask : FrostingTask<BuildContext>
         else
             Directory.CreateDirectory(directory.Path.FullPath);
 
-        context.CopyFiles("**/src/**/*.nupkg", directory);
-        context.CopyFiles("**/src/**/*.snupkg", directory);
+        context.CopyFiles("../../../src/**/*.nupkg", directory);
+        context.CopyFiles("../../../src/**/*.snupkg", directory);
     }
 }
