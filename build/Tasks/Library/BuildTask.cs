@@ -15,11 +15,11 @@ public sealed class BuildTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        context.CleanDirectories($"./src/**/obj/");
-        context.CleanDirectories($"./src/**/bin/{context.MsBuildConfiguration}");
+        context.CleanDirectories($"**/src/**/obj/");
+        context.CleanDirectories($"**/src/**/bin/{context.MsBuildConfiguration}");
 
         //context.MSBuild("Shiny.sln", x => x
-        context.MSBuild("Build.slnf", x => x
+        context.MSBuild("../../../Build.slnf", x => x
             .WithRestore()
             .WithTarget("Clean")
             .WithTarget("Build")
