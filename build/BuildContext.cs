@@ -1,10 +1,10 @@
-﻿using Cake.Frosting;
-using Cake.Git;
-using Cake.Common;
+﻿using Cake.Common;
 using Cake.Common.Build;
 using Cake.Core;
-using Cake.Core.IO;
 using Cake.Core.Diagnostics;
+using Cake.Core.IO;
+using Cake.Frosting;
+using Cake.Git;
 using Cake.GitVersioning;
 
 namespace Codelisk.NugetPublish;
@@ -25,20 +25,20 @@ public class BuildContext : FrostingContext
             context.Environment.WorkingDirectory = dir;
         }
 #endif
-        this.Branch = context.GitBranchCurrent(".");
+        Branch = context.GitBranchCurrent(".");
 
-        this.ReleaseVersion = this.GitVersioningGetVersion().NuGetPackageVersion;
-        this.Log.Information("NUGET PACKAGE VERSION: " + this.ReleaseVersion);
+        ReleaseVersion = this.GitVersioningGetVersion().NuGetPackageVersion;
+        Log.Information("NUGET PACKAGE VERSION: " + ReleaseVersion);
     }
 
 
     public string ReleaseVersion { get; }
     //public bool UseXamarinPreview => this.HasArgumentOrEnvironment("UseXamarinPreview");
-    public string GitHubSecretToken => this.ArgumentOrEnvironment<string>("GITHUB_TOKEN");
-    public string OperatingSystemString => this.Environment.Platform.Family == PlatformFamily.Windows ? "WINDOWS_NT" : "MAC";
-    public string MsBuildConfiguration => this.ArgumentOrEnvironment("configuration", Constants.DefaultBuildConfiguration);
-    public string NugetApiKey => this.ArgumentOrEnvironment<string>("NugetApiKey");
-    public bool AllowNugetUploadFailures => this.ArgumentOrEnvironment("AllowNugetUploadFailures", false);
+    public string GitHubSecretToken => ArgumentOrEnvironment<string>("GITHUB_TOKEN");
+    public string OperatingSystemString => Environment.Platform.Family == PlatformFamily.Windows ? "WINDOWS_NT" : "MAC";
+    public string MsBuildConfiguration => ArgumentOrEnvironment("configuration", Constants.DefaultBuildConfiguration);
+    public string NugetApiKey => ArgumentOrEnvironment<string>("NugetApiKey");
+    public bool AllowNugetUploadFailures => ArgumentOrEnvironment("AllowNugetUploadFailures", false);
     public GitBranch Branch { get; }
 
     public T ArgumentOrEnvironment<T>(string name, T defaultValue = default)
@@ -51,18 +51,18 @@ public class BuildContext : FrostingContext
     {
         get
         {
-            if (this.IsRunningInCI)
+            if (IsRunningInCI)
                 return this.GitHubActions().Environment.Workflow.Workspace + "/artifacts";
 
-            return System.IO.Path.Combine(this.Environment.WorkingDirectory.FullPath, "artifacts");
+            return System.IO.Path.Combine(Environment.WorkingDirectory.FullPath, "artifacts");
         }
     }
 
-    public bool IsReleaseBranch => this.Branch.FriendlyName.ToLower().StartsWith("v");
+    public bool IsReleaseBranch => Branch.FriendlyName.ToLower().StartsWith("v");
 
 
     public bool IsPullRequest =>
-        this.IsRunningInCI &&
+        IsRunningInCI &&
         this.GitHubActions().Environment.PullRequest.IsPullRequest;
 
     public bool IsRunningInCI
@@ -73,14 +73,14 @@ public class BuildContext : FrostingContext
     {
         get
         {
-            if (this.IsPullRequest)
+            if (IsPullRequest)
                 return false;
 
-            var bn = this.Branch.FriendlyName.ToLower();
+            var bn = Branch.FriendlyName.ToLower();
             return bn.Equals("main") || bn.Equals("master") || bn.Equals("preview") || bn.StartsWith("v");
         }
     }
 
 
-    public bool IsDocsDeployBranch => this.IsNugetDeployBranch && !this.IsPullRequest;
+    public bool IsDocsDeployBranch => IsNugetDeployBranch && !IsPullRequest;
 }

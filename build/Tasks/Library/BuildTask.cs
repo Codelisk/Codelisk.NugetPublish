@@ -1,7 +1,6 @@
 ﻿using Cake.Common;
 using Cake.Common.IO;
 using Cake.Common.Tools.MSBuild;
-using Cake.Core.Diagnostics;
 using Cake.Frosting;
 
 namespace Codelisk.NugetPublish.Tasks.Library;

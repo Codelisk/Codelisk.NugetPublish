@@ -26,9 +26,9 @@ public class ReleaseAnnouncementTask : AsyncFrostingTask<BuildContext>
         var message = $"Shiny {context.ReleaseVersion} released! Check out the latest info @ https://shinylib.net";
 
         return Task.WhenAll(
-            this.Twitter(context, message),
-            this.Discord(context, message),
-            this.Mastodon(context, message)
+            Twitter(context, message),
+            Discord(context, message),
+            Mastodon(context, message)
         );
     }
 
@@ -46,7 +46,7 @@ public class ReleaseAnnouncementTask : AsyncFrostingTask<BuildContext>
     //}
 
 
-    async Task Twitter(BuildContext context, string message)
+    private async Task Twitter(BuildContext context, string message)
     {
         try
         {
@@ -74,8 +74,7 @@ public class ReleaseAnnouncementTask : AsyncFrostingTask<BuildContext>
         }
     }
 
-
-    async Task Mastodon(BuildContext context, string message)
+    private async Task Mastodon(BuildContext context, string message)
     {
         try
         {
@@ -105,8 +104,7 @@ public class ReleaseAnnouncementTask : AsyncFrostingTask<BuildContext>
         }
     }
 
-
-    async Task Discord(BuildContext context, string message)
+    private async Task Discord(BuildContext context, string message)
     {
         try
         {

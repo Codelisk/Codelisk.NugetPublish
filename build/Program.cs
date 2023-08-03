@@ -2,8 +2,7 @@
 
 namespace Codelisk.NugetPublish;
 
-
-class Program
+internal class Program
 {
     //https://cakebuild.net/docs/running-builds/runners/cake-frosting#bootstrapping-for-cake-frosting
     public static int Main(string[] args)

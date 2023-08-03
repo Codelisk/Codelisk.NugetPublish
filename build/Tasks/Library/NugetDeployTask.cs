@@ -1,7 +1,5 @@
 ﻿using Cake.Common;
 using Cake.Common.IO;
-using Cake.Common.Tools.DotNet;
-using Cake.Common.Tools.DotNet.NuGet.Push;
 using Cake.Core;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
@@ -15,7 +13,7 @@ namespace Codelisk.NugetPublish.Tasks.Library;
 //[IsDependeeOf(typeof(BasicTestsTask))]
 public sealed class NugetDeployTask : FrostingTask<BuildContext>
 {
-    const string MainNuget = "https://api.nuget.org/v3/index.json";
+    private const string MainNuget = "https://api.nuget.org/v3/index.json";
 
     public override bool ShouldRun(BuildContext context)
     {
