@@ -28,7 +28,6 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
         var settings = new DotNetNuGetPushSettings
         {
             ApiKey = context.NugetApiKey,
-            Source = MainNuget,
             SkipDuplicate = true
         };
 
