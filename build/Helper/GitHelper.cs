@@ -21,7 +21,7 @@ namespace Codelisk.NugetPublish.Helper
                 .Append($"submodule foreach '{gitCommand}'")
             });
         }
-        public static void GitPushBranch(this BuildContext context, string branchName)
+        public static void GitPushBranch(this BuildContext context)
         {
             context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
             context.StartProcess($"git", $"push -u https://github.com/Codelisk/CodeGen");
