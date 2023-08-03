@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Cake.Git;
+using Codelisk.NugetPublish.Helper;
 
 namespace Codelisk.NugetPublish.Tasks.Library
 {
@@ -66,6 +68,18 @@ namespace Codelisk.NugetPublish.Tasks.Library
             }
 
             throw new InvalidOperationException("Version element not found or invalid in the XML.");
+        }
+        private void CommitChanges(BuildContext context, string filePath)
+        {
+            var branch = context.GitBranchCurrent(new Cake.Core.IO.DirectoryPath(filePath));
+            string name = "Pipeline";
+            string email = "pipeline@commit.at";
+
+            var commitMessage = "Updated version in Directory.Build.props"; // Customize your commit message
+
+            context.GitAddAll(filePath);
+            context.GitCommit(filePath, name, email, commitMessage);
+            context.GitPushBranch(branch.FriendlyName);
         }
     }
 }
