@@ -8,8 +8,8 @@ using Cake.Frosting;
 namespace Codelisk.NugetPublish.Tasks.Library;
 
 
-[TaskName("NugetDeploy")]
-[IsDependentOn(typeof(BuildTask))]
+[TaskName(nameof(NugetDeployTask))]
+[IsDependentOn(typeof(NugetIncrementVersionTask))]
 //[IsDependeeOf(typeof(BasicTestsTask))]
 public sealed class NugetDeployTask : FrostingTask<BuildContext>
 {
