@@ -28,7 +28,8 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
         var settings = new DotNetNuGetPushSettings
         {
             ApiKey = context.NugetApiKey,
-            SkipDuplicate = true
+            SkipDuplicate = true,
+            NoServiceEndpoint = true,
         };
 
         var packages = context.GetFiles("../../../src/**/*.nupkg");
