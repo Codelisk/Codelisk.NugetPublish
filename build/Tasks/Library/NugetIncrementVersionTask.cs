@@ -71,7 +71,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
         }
         private void CommitChanges(BuildContext context, string filePath)
         {
-            var branch = context.GitBranchCurrent(new Cake.Core.IO.DirectoryPath(filePath));
+            var branch = context.Branch;
             string name = "Pipeline";
             string email = "pipeline@commit.at";
 

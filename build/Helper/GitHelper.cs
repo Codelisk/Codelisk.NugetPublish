@@ -11,7 +11,7 @@ namespace Codelisk.NugetPublish.Helper
 {
     public static class GitHelper
     {
-        public static void GitSubmoduleForEach(this ICakeContext context, string gitCommand)
+        public static void GitSubmoduleForEach(this BuildContext context, string gitCommand)
         {
             context.StartProcess($"git", new ProcessSettings
             {
@@ -19,7 +19,7 @@ namespace Codelisk.NugetPublish.Helper
                 .Append($"submodule foreach '{gitCommand}'")
             });
         }
-        public static void GitPushBranch(this ICakeContext context, string branchName)
+        public static void GitPushBranch(this BuildContext context, string branchName)
         {
             context.StartProcess($"git", $"push origin {branchName}");
         }
