@@ -23,8 +23,21 @@ namespace Codelisk.NugetPublish.Helper
         }
         public static void GitPushBranch(this BuildContext context)
         {
-            context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
-            context.StartProcess($"git", $"push -u https://github.com/Codelisk/CodeGen");
+            var command = new ProcessArgumentBuilder()
+                .Append("git")
+                .Append("push")
+                .Append("-u")
+                .Append("https://github.com/Codelisk/CodeGen")
+                .Append("master");
+
+            // Execute the command
+            var processSettings = new ProcessSettings
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+
+            var result = context.StartProcess("git", new ProcessSettings { Arguments = command.Render() });
         }
     }
 }
