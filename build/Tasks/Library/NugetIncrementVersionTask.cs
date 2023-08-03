@@ -60,7 +60,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
             if (versionNode != null && Version.TryParse(versionNode.Value, out var version))
             {
-                var incrementedVersion = new Version(version.Major, version.Minor, version.Build + 1, version.Revision);
+                var incrementedVersion = new Version(version.Major, version.Minor, version.Build + 1);
                 versionNode.Value = incrementedVersion.ToString();
                 return doc.ToString();
             }
