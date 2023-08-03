@@ -1,7 +1,10 @@
-﻿using Cake.Common.IO;
+﻿using Cake.Common;
+using Cake.Common.IO;
 using Cake.Common.Tools.DotNet;
 using Cake.Common.Tools.DotNet.NuGet.Push;
+using Cake.Core;
 using Cake.Core.Diagnostics;
+using Cake.Core.IO;
 using Cake.Frosting;
 
 namespace Codelisk.NugetPublish.Tasks.Library;
@@ -38,18 +41,26 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
         var packages = context.GetFiles("../../../src/**/*.nupkg");
         foreach (var package in packages)
         {
-            //try
-            //{
-            context.Log.Warning("PACKAGE" + package.FullPath);
-            context.DotNetNuGetPush(package.FullPath, settings);
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (context.AllowNugetUploadFailures)
-            //        context.Error($"Error Upload: {package.FullPath} - Exception: {ex}");
-            //    else
-            //        throw; // break build
-            //}
+            // Build the command
+            var command = new ProcessArgumentBuilder()
+                .Append("dotnet")
+                .Append("nuget")
+                .Append("push")
+                .Append(package.FullPath)              // Add the package file path
+                .Append("--source")                   // Specify the NuGet source
+                .Append(MainNuget)                    // Add the source URL
+                .Append("--api-key")
+                .AppendSecret("oy2jmq4cpb4wtrtna2oqszv4m6ndnnhujhteddfyy7tusy");        // Add the API key as a secret
+
+            // Execute the command
+            var processSettings = new ProcessSettings
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+
+            var result = context.StartProcess("dotnet", new ProcessSettings { Arguments = command.Render() });
+
         }
     }
 }
