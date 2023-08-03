@@ -1,6 +1,7 @@
 ﻿using Cake.Common;
 using Cake.Common.IO;
 using Cake.Common.Tools.MSBuild;
+using Cake.Core.Diagnostics;
 using Cake.Frosting;
 
 namespace Codelisk.NugetPublish.Tasks.Library;
@@ -15,6 +16,8 @@ public sealed class BuildTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
+        context.Log.Information("NUGETAPIKEY" + context.NugetApiKey);
+
         context.CleanDirectories($"**/src/**/obj/");
         context.CleanDirectories($"**/src/**/bin/{context.MsBuildConfiguration}");
 

@@ -1,6 +1,7 @@
 ﻿using Cake.Common.IO;
 using Cake.Common.Tools.DotNet;
 using Cake.Common.Tools.DotNet.NuGet.Push;
+using Cake.Core.Diagnostics;
 using Cake.Frosting;
 
 namespace Codelisk.NugetPublish.Tasks.Library;
@@ -25,6 +26,7 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
+        context.Log.Information("NUGETAPIKEY" + context.NugetApiKey);
         var settings = new DotNetNuGetPushSettings
         {
             ApiKey = context.NugetApiKey,
