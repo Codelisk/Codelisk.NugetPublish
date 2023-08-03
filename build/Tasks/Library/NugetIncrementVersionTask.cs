@@ -79,7 +79,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
             context.GitAddAll(filePath);
             context.GitCommit(filePath, name, email, commitMessage);
-            context.GitPushBranch(branch.FriendlyName);
+            context.GitPush(filePath);
         }
     }
 }
