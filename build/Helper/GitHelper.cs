@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Cake.Common;
 using Cake.Git;
+using Cake.Core.Diagnostics;
 
 namespace Codelisk.NugetPublish.Helper
 {
@@ -22,7 +23,8 @@ namespace Codelisk.NugetPublish.Helper
         }
         public static void GitPushBranch(this BuildContext context, string branchName)
         {
-            context.StartProcess($"git", $"push origin {branchName}");
+            context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
+            context.StartProcess($"git", $"push origin -u {branchName}");
         }
     }
 }
