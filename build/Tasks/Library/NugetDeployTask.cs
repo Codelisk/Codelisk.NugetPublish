@@ -29,18 +29,10 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        context.Log.Warning("NUGETAPIKEY" + context.NugetApiKey +"ENDE");
-        var settings = new DotNetNuGetPushSettings
-        {
-            ApiKey = "oy2jmq4cpb4wtrtna2oqszv4m6ndnnhujhteddfyy7tusy",
-            Source= MainNuget,
-            SkipDuplicate = true,
-            NoServiceEndpoint = true,
-        };
-
         var packages = context.GetFiles("../../../src/**/*.nupkg");
         foreach (var package in packages)
         {
+            context.Log.Information("Pushing NuGet package {0}", package.FullPath);
             // Build the command
             var command = new ProcessArgumentBuilder()
                 .Append("dotnet")
@@ -50,7 +42,7 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
                 .Append("--source")                   // Specify the NuGet source
                 .Append(MainNuget)                    // Add the source URL
                 .Append("--api-key")
-                .AppendSecret("oy2jmq4cpb4wtrtna2oqszv4m6ndnnhujhteddfyy7tusy");        // Add the API key as a secret
+                .AppendSecret(context.NugetApiKey);        // Add the API key as a secret
 
             // Execute the command
             var processSettings = new ProcessSettings
@@ -60,7 +52,6 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
             };
 
             var result = context.StartProcess("dotnet", new ProcessSettings { Arguments = command.Render() });
-
         }
     }
 }
