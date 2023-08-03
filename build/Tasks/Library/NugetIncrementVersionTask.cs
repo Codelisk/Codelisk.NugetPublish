@@ -34,6 +34,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
             // Increment the version and update the file
             IncrementAndSaveVersion(propsFilePath, context);
+            CommitChanges(context, propsFilePath);
         }
         // Increment the version and update the file
         void IncrementAndSaveVersion(string filePath, BuildContext context)
