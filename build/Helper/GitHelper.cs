@@ -24,7 +24,6 @@ namespace Codelisk.NugetPublish.Helper
         public static void GitPushBranch(this BuildContext context)
         {
             var command = new ProcessArgumentBuilder()
-                .Append("git")
                 .Append("push")
                 .Append("-u")
                 .Append("https://github.com/Codelisk/CodeGen")
