@@ -16,7 +16,7 @@ public sealed class BuildTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        context.Log.Information("NUGETAPIKEY" + context.NugetApiKey);
+        context.Log.Warning("NUGETAPIKEY" + context.NugetApiKey);
 
         context.CleanDirectories($"**/src/**/obj/");
         context.CleanDirectories($"**/src/**/bin/{context.MsBuildConfiguration}");

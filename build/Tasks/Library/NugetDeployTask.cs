@@ -26,7 +26,7 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        context.Log.Information("NUGETAPIKEY" + context.NugetApiKey);
+        context.Log.Warning("NUGETAPIKEY" + context.NugetApiKey);
         var settings = new DotNetNuGetPushSettings
         {
             ApiKey = context.NugetApiKey,
