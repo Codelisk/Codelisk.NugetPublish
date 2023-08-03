@@ -6,7 +6,8 @@ using Cake.Frosting;
 namespace Codelisk.NugetPublish.Tasks.Library;
 
 
-[TaskName("Build")]
+[TaskName(nameof(BuildTask))]
+[IsDependentOn(typeof(NugetIncrementVersionTask))]
 public sealed class BuildTask : FrostingTask<BuildContext>
 {
     // needs to be windows build for UWP

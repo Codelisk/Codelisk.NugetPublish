@@ -9,7 +9,7 @@ namespace Codelisk.NugetPublish.Tasks.Library;
 
 
 [TaskName(nameof(NugetDeployTask))]
-[IsDependentOn(typeof(NugetIncrementVersionTask))]
+[IsDependentOn(typeof(BuildTask))]
 //[IsDependeeOf(typeof(BasicTestsTask))]
 public sealed class NugetDeployTask : FrostingTask<BuildContext>
 {

@@ -16,7 +16,6 @@ using Codelisk.NugetPublish.Helper;
 namespace Codelisk.NugetPublish.Tasks.Library
 {
     [TaskName(nameof(NugetIncrementVersionTask))]
-    [IsDependentOn(typeof(BuildTask))]
     public sealed class NugetIncrementVersionTask : FrostingTask<BuildContext>
     {
         public override bool ShouldRun(BuildContext context)
