@@ -79,7 +79,8 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
             context.GitAddAll(filePath);
             context.GitCommit(filePath, name, email, commitMessage);
-            context.GitPush(context.Environment.WorkingDirectory.FullPath);
+            context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
+            context.GitPushBranch();
         }
     }
 }

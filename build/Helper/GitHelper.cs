@@ -24,7 +24,7 @@ namespace Codelisk.NugetPublish.Helper
         public static void GitPushBranch(this BuildContext context, string branchName)
         {
             context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
-            context.StartProcess($"git", $"push origin -u {branchName}");
+            context.StartProcess($"git", $"push -u https://github.com/Codelisk/CodeGen");
         }
     }
 }
