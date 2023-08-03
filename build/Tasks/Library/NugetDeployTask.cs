@@ -26,10 +26,11 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        context.Log.Warning("NUGETAPIKEY" + context.NugetApiKey);
+        context.Log.Warning("NUGETAPIKEY" + context.NugetApiKey +"ENDE");
         var settings = new DotNetNuGetPushSettings
         {
-            ApiKey = context.NugetApiKey,
+            ApiKey = "oy2jmq4cpb4wtrtna2oqszv4m6ndnnhujhteddfyy7tusy",
+            Source= MainNuget,
             SkipDuplicate = true,
             NoServiceEndpoint = true,
         };
@@ -39,7 +40,8 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
         {
             //try
             //{
-                context.DotNetNuGetPush(package.FullPath, settings);
+            context.Log.Warning("PACKAGE" + package.FullPath);
+            context.DotNetNuGetPush(package.FullPath, settings);
             //}
             //catch (Exception ex)
             //{
