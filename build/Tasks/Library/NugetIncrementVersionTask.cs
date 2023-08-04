@@ -77,7 +77,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
             string email = "pipeline@commit.at";
 
             var commitMessage = "Updated version in Directory.Build.props"; // Customize your commit message
-            filePath = "**/";
+            filePath = @"\";
             context.GitCheckout(filePath);
             context.GitAddAll(filePath);
             context.GitCommit(filePath, name, email, commitMessage);
