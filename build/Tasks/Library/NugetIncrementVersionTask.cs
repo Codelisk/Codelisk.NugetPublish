@@ -82,11 +82,8 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
             filePath = ".";
             //context.GitCheckout(filePath, new FilePath("CodeGen.git"));
-            context.GitAddAll(".");
-            context.GitCommit(filePath, name, email, commitMessage);
-            context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
-            context.GitPull(filePath, name, email);
-            context.GitPush(filePath, name, email);
+            context.GitAdd();
+            context.GitCommit(commitMessage);
             context.GitPushBranch();
 
             throw new InvalidCastException();

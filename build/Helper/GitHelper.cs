@@ -21,6 +21,24 @@ namespace Codelisk.NugetPublish.Helper
                 .Append($"submodule foreach '{gitCommand}'")
             });
         }
+        public static void GitAdd(this BuildContext context)
+        {
+            var command = new ProcessArgumentBuilder()
+                .Append("add")
+                .Append(".");
+
+            var result = context.StartProcess("git", new ProcessSettings { Arguments = command.Render() });
+        }
+        public static void GitCommit(this BuildContext context, string message)
+        {
+            var command = new ProcessArgumentBuilder()
+                .Append("commit")
+                .Append("-m")
+                .Append(message);
+
+
+            var result = context.StartProcess("git", new ProcessSettings { Arguments = command.Render() });
+        }
         public static void GitPushBranch(this BuildContext context)
         {
             var command = new ProcessArgumentBuilder()
@@ -28,13 +46,6 @@ namespace Codelisk.NugetPublish.Helper
                 .Append("-u")
                 .Append("https://github.com/Codelisk/CodeGen")
                 .Append("master");
-
-            // Execute the command
-            var processSettings = new ProcessSettings
-            {
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
 
             var result = context.StartProcess("git", new ProcessSettings { Arguments = command.Render() });
         }
