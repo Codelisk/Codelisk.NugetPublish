@@ -19,6 +19,8 @@ public class BuildContext : FrostingContext
         if (!context.GitIsValidRepository(context.Environment.WorkingDirectory))
         {
             var dir = new DirectoryPath(".");
+            dir = new DirectoryPath(Directory.GetParent(dir.FullPath).FullName);
+            dir = new DirectoryPath(Directory.GetParent(dir.FullPath).FullName);
             while (!context.GitIsValidRepository(dir))
                 dir = new DirectoryPath(Directory.GetParent(dir.FullPath).FullName);
 
