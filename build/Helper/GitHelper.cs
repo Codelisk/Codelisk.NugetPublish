@@ -27,14 +27,12 @@ namespace Codelisk.NugetPublish.Helper
         {
             var command = new ProcessArgumentBuilder()
                 .Append("config")
-                .Append(".")
                 .Append("--global")
             .Append("user.name")
                 .Append($"\"{username}\"");
 
             var command2 = new ProcessArgumentBuilder()
                 .Append("config")
-                .Append(".")
                 .Append("--global")
             .Append("user.email")
                 .Append($"\"{email}\"");
