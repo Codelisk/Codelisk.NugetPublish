@@ -71,6 +71,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
         }
         private void CommitChanges(BuildContext context, string filePath)
         {
+            filePath = "../../" + context.Environment.WorkingDirectory.FullPath;
             var branch = context.Branch;
             string name = "Pipeline";
             string email = "pipeline@commit.at";
@@ -87,6 +88,8 @@ namespace Codelisk.NugetPublish.Tasks.Library
             context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
             context.GitPull(filePath, name, email);
             context.GitPushBranch();
+
+            throw new InvalidCastException();
         }
     }
 }
