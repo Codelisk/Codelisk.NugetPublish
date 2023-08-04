@@ -86,8 +86,6 @@ namespace Codelisk.NugetPublish.Tasks.Library
             context.GitAdd();
             context.GitCommit(commitMessage);
             context.GitPushBranch();
-
-            throw new InvalidCastException();
         }
     }
 }
