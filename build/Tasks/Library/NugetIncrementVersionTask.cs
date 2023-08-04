@@ -71,7 +71,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
         }
         private void CommitChanges(BuildContext context, string filePath)
         {
-            filePath = "../../" + context.Environment.WorkingDirectory.FullPath;
+            filePath =  context.Environment.WorkingDirectory.FullPath + "/../../";
             var branch = context.Branch;
             string name = "Pipeline";
             string email = "pipeline@commit.at";
