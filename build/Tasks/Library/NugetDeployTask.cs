@@ -27,7 +27,7 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
 
     public override void Run(BuildContext context)
     {
-        var packages = context.GetFiles("../../../src/**/*.nupkg");
+        var packages = context.GetFiles("**/*.nupkg");
         foreach (var package in packages)
         {
             context.Log.Information("Pushing NuGet package {0}", package.FullPath);
