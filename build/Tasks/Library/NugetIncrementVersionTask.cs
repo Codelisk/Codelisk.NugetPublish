@@ -80,13 +80,13 @@ namespace Codelisk.NugetPublish.Tasks.Library
             var tt = new DirectoryPath(filePath);
             context.Log.Warning("FFF FilePath:" + tt.FullPath);
 
-            context.Log.Warning("FFF FilePath:" + tt.FullPath);
 
             context.GitCheckout(filePath, new FilePath("CodeGen.git"));
             context.GitAddAll(filePath);
             context.GitCommit(filePath, name, email, commitMessage);
             context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
             context.GitPull(filePath, name, email);
+            context.GitPush(filePath, name, email);
             context.GitPushBranch();
 
             throw new InvalidCastException();
