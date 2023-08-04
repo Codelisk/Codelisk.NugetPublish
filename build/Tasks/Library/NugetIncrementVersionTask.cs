@@ -30,7 +30,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
         public override void Run(BuildContext context)
         {
-            var propsFilePath = "../../../Directory.Build.props"; // Update with the correct file path
+            var propsFilePath = "Directory.Build.props"; // Update with the correct file path
 
             // Increment the version and update the file
             IncrementAndSaveVersion(propsFilePath, context);
