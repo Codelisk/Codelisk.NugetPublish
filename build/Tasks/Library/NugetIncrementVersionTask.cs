@@ -71,12 +71,14 @@ namespace Codelisk.NugetPublish.Tasks.Library
         }
         private void CommitChanges(BuildContext context, string filePath)
         {
+            context.Log.Warning("FFF FilePath:" + filePath);
             var branch = context.Branch;
             string name = "Pipeline";
             string email = "pipeline@commit.at";
 
             var commitMessage = "Updated version in Directory.Build.props"; // Customize your commit message
-
+            filePath = "https://github.com/Codelisk/CodeGen";
+            context.GitCheckout(filePath);
             context.GitAddAll(filePath);
             context.GitCommit(filePath, name, email, commitMessage);
             context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
