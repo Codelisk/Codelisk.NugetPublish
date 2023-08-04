@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Cake.Common;
 using Cake.Git;
 using Cake.Core.Diagnostics;
+using Tweetinvi.Core.Models;
+using NuGet.Protocol.Plugins;
 
 namespace Codelisk.NugetPublish.Helper
 {
@@ -20,6 +22,25 @@ namespace Codelisk.NugetPublish.Helper
                 Arguments = new ProcessArgumentBuilder()
                 .Append($"submodule foreach '{gitCommand}'")
             });
+        }
+        public static void GitConfig(this BuildContext context, string username, string email)
+        {
+            var command = new ProcessArgumentBuilder()
+                .Append("config")
+                .Append(".")
+                .Append("--global")
+            .Append("user.name")
+                .Append($"\"{username}\"");
+
+            var command2 = new ProcessArgumentBuilder()
+                .Append("config")
+                .Append(".")
+                .Append("--global")
+            .Append("user.email")
+                .Append($"\"{email}\"");
+
+            var result = context.StartProcess("git", new ProcessSettings { Arguments = command.Render() });
+            context.StartProcess("git", new ProcessSettings { Arguments = command2.Render() });
         }
         public static void GitAdd(this BuildContext context)
         {

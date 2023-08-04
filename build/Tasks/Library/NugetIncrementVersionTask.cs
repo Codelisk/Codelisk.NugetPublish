@@ -82,6 +82,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
             filePath = ".";
             //context.GitCheckout(filePath, new FilePath("CodeGen.git"));
+            context.GitConfig(name, email);
             context.GitAdd();
             context.GitCommit(commitMessage);
             context.GitPushBranch();
