@@ -34,7 +34,7 @@ namespace Codelisk.NugetPublish.Helper
             var command = new ProcessArgumentBuilder()
                 .Append("commit")
                 .Append("-m")
-                .Append(message);
+                .Append($"\"{message}\"");
 
 
             var result = context.StartProcess("git", new ProcessSettings { Arguments = command.Render() });
