@@ -80,9 +80,9 @@ namespace Codelisk.NugetPublish.Tasks.Library
             var tt = new DirectoryPath(filePath);
             context.Log.Warning("FFF FilePath:" + tt.FullPath);
 
-            filePath = context.Environment.WorkingDirectory.FullPath;
+            filePath = ".";
             //context.GitCheckout(filePath, new FilePath("CodeGen.git"));
-            context.GitAddAll(filePath);
+            context.GitAddAll(".");
             context.GitCommit(filePath, name, email, commitMessage);
             context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
             context.GitPull(filePath, name, email);
