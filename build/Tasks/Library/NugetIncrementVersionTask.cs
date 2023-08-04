@@ -80,6 +80,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
             context.GitAddAll(filePath);
             context.GitCommit(filePath, name, email, commitMessage);
             context.Log.Warning(context.Environment.WorkingDirectory.FullPath);
+            context.GitPull(filePath, name, email);
             context.GitPushBranch();
         }
     }
