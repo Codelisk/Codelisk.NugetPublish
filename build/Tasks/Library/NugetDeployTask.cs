@@ -40,7 +40,8 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
                 .Append("--source")                   // Specify the NuGet source
                 .Append(MainNuget)                    // Add the source URL
                 .Append("--api-key")
-                .AppendSecret(context.NugetApiKey);// Add the API key as a secret
+                .AppendSecret(context.NugetApiKey)// Add the API key as a secret
+                .Append("--skip-duplicate");
 
             // Execute the command
             var processSettings = new ProcessSettings
