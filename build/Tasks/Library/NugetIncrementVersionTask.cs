@@ -34,7 +34,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
             // Increment the version and update the file
             IncrementAndSaveVersion(propsFilePath, context);
-            CommitChanges(context, "../../../");
+            CommitChanges(context);
         }
         // Increment the version and update the file
         void IncrementAndSaveVersion(string filePath, BuildContext context)
@@ -69,18 +69,12 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
             throw new InvalidOperationException("Version element not found or invalid in the XML.");
         }
-        private void CommitChanges(BuildContext context, string filePath)
+        private void CommitChanges(BuildContext context)
         {
-            filePath =  context.Environment.WorkingDirectory.FullPath + "/../../../";
-            var branch = context.Branch;
             string name = "Pipeline";
             string email = "pipeline@commit.at";
 
             var commitMessage = "Updated version in Directory.Build.props"; // Customize your commit message
-            var tt = new DirectoryPath(filePath);
-            context.Log.Warning("FFF FilePath:" + tt.FullPath);
-
-            filePath = ".";
             //context.GitCheckout(filePath, new FilePath("CodeGen.git"));
             context.GitConfig(name, email);
             context.GitAdd();
