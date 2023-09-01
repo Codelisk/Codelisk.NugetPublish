@@ -1,17 +1,8 @@
-﻿using Cake.Common.IO;
-using Cake.Common;
-using Cake.Core.Diagnostics;
-using Cake.Core.IO;
+﻿using Cake.Core.Diagnostics;
 using Cake.Frosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using Cake.Git;
 using Codelisk.NugetPublish.Helper;
+using System.Xml.Linq;
 
 namespace Codelisk.NugetPublish.Tasks.Library
 {
@@ -36,8 +27,9 @@ namespace Codelisk.NugetPublish.Tasks.Library
             IncrementAndSaveVersion(propsFilePath, context);
             CommitChanges(context);
         }
+
         // Increment the version and update the file
-        void IncrementAndSaveVersion(string filePath, BuildContext context)
+        private void IncrementAndSaveVersion(string filePath, BuildContext context)
         {
             var xmlContent = File.ReadAllText(filePath);
 

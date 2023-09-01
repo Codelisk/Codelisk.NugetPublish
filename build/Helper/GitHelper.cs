@@ -1,15 +1,6 @@
-﻿using Cake.Core.IO;
+﻿using Cake.Common;
 using Cake.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cake.Common;
-using Cake.Git;
-using Cake.Core.Diagnostics;
-using Tweetinvi.Core.Models;
-using NuGet.Protocol.Plugins;
+using Cake.Core.IO;
 
 namespace Codelisk.NugetPublish.Helper
 {
