@@ -28,7 +28,7 @@ public class BuildContext : FrostingContext
         }
 #endif
         Branch = context.GitBranchCurrent(".");
-
+var test=this.GitVersioningGetVersion();
         ReleaseVersion = this.GitVersioningGetVersion().NuGetPackageVersion;
         Log.Information("NUGET PACKAGE VERSION: " + ReleaseVersion);
     }

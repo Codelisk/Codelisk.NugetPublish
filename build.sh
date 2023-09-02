@@ -1,0 +1,1 @@
+dotnet run --project build/Codelisk.NugetPublish.csproj -- "$@"
