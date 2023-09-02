@@ -16,7 +16,7 @@ public class BuildContext : FrostingContext
     {
 #if DEBUG
         //walk backwards until git directory found -that's root
-        if (!context.GitIsValidRepository(context.Environment.WorkingDirectory))
+        if (false && !context.GitIsValidRepository(context.Environment.WorkingDirectory))
         {
             var dir = new DirectoryPath(".");
             dir = new DirectoryPath(Directory.GetParent(dir.FullPath).FullName);
@@ -27,8 +27,7 @@ public class BuildContext : FrostingContext
             context.Environment.WorkingDirectory = dir;
         }
 #endif
-        Branch = context.GitBranchCurrent(".");
-var test=this.GitVersioningGetVersion();
+        var test = this.GitVersioningGetVersion();
         ReleaseVersion = this.GitVersioningGetVersion().NuGetPackageVersion;
         Log.Information("NUGET PACKAGE VERSION: " + ReleaseVersion);
     }
