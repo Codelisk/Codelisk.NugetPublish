@@ -40,8 +40,9 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
                 .Append("push")
                 .Append(package.FullPath)              // Add the package file path
                 .Append("--source")                   // Specify the NuGet source
-                .Append(MainNuget)                    // Add the source URL
-                .Append("--api-key")
+                .Append(MainNuget)               // Add the source URL
+                .Append("--version " + context.ReleaseVersion)                  // Add the source URL
+                .Append("--api-key")   
                 .AppendSecret(context.NugetApiKey)// Add the API key as a secret
                 .Append("--skip-duplicate");
 
