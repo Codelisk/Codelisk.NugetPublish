@@ -11,6 +11,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
     {
         public override bool ShouldRun(BuildContext context)
         {
+            return false;
             var result = context.IsRunningInCI;
             if (result && String.IsNullOrWhiteSpace(context.NugetApiKey))
                 throw new ArgumentException("NugetApiKey is missing");

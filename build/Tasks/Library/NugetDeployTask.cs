@@ -28,8 +28,10 @@ public sealed class NugetDeployTask : FrostingTask<BuildContext>
     public override void Run(BuildContext context)
     {
         var packages = context.GetFiles("**/*.nupkg");
+        var jsonFiles = context.GetFiles("**/*.json");
         foreach (var package in packages)
         {
+            context.Log.Information("Version", jsonFiles.Select(x=>x.FullPath));
             context.Log.Information("Pushing NuGet package {0}", package.FullPath);
             // Build the command
             var command = new ProcessArgumentBuilder()

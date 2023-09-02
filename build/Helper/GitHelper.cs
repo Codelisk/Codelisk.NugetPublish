@@ -54,7 +54,6 @@ namespace Codelisk.NugetPublish.Helper
             var command = new ProcessArgumentBuilder()
                 .Append("push")
                 .Append("-u")
-                .Append("https://github.com/Codelisk/CodeGen")
                 .Append("master");
 
             var result = context.StartProcess("git", new ProcessSettings { Arguments = command.Render() });
