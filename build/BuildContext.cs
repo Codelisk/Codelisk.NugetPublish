@@ -14,11 +14,6 @@ public class BuildContext : FrostingContext
 {
     public BuildContext(ICakeContext context) : base(context)
     {
-        context.StartProcess($"nbgv", new ProcessSettings
-        {
-            Arguments = new ProcessArgumentBuilder()
-                .Append($"prepare-release")
-        });
 
         //walk backwards until git directory found -that's root
         if (!context.GitIsValidRepository(context.Environment.WorkingDirectory))

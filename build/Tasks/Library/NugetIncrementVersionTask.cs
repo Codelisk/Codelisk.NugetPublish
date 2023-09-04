@@ -1,4 +1,7 @@
-﻿using Cake.Core.Diagnostics;
+﻿using Cake.Common;
+using Cake.Core;
+using Cake.Core.Diagnostics;
+using Cake.Core.IO;
 using Cake.Frosting;
 using Cake.Git;
 using Codelisk.NugetPublish.Helper;
@@ -11,7 +14,6 @@ namespace Codelisk.NugetPublish.Tasks.Library
     {
         public override bool ShouldRun(BuildContext context)
         {
-            return false;
             var result = context.IsRunningInCI;
             if (result && String.IsNullOrWhiteSpace(context.NugetApiKey))
                 throw new ArgumentException("NugetApiKey is missing");
@@ -22,6 +24,7 @@ namespace Codelisk.NugetPublish.Tasks.Library
 
         public override void Run(BuildContext context)
         {
+            
             var propsFilePath = "version.txt"; // Update with the correct file path
 
             // Increment the version and update the file
@@ -32,35 +35,11 @@ namespace Codelisk.NugetPublish.Tasks.Library
         // Increment the version and update the file
         private void IncrementAndSaveVersion(string filePath, BuildContext context)
         {
-            var xmlContent = File.ReadAllText(filePath);
-
-            // Find the Version element and increment it
-            xmlContent = UpdateVersion(xmlContent);
-            context.Log.Warning(xmlContent);
-            // Write the updated content back to the file
-            File.WriteAllText(filePath, xmlContent);
-        }
-
-        private string UpdateVersion(string xmlContent)
-        {
-            var doc = XDocument.Parse(xmlContent);
-
-            var namespaceName = doc.Root.GetDefaultNamespace().NamespaceName;
-            XNamespace ns = namespaceName;
-
-            var versionNode = doc.Descendants("PropertyGroup")
-                                 .Where(pg => pg.Attribute("Condition")?.Value == "'$(Configuration)' == 'Release'")
-                                 .Elements("Version")
-                                 .FirstOrDefault();
-
-            if (versionNode != null && Version.TryParse(versionNode.Value, out var version))
+            context.StartProcess($"nbgv", new ProcessSettings
             {
-                var incrementedVersion = new Version(version.Major, version.Minor, version.Build + 1);
-                versionNode.Value = incrementedVersion.ToString();
-                return doc.ToString();
-            }
-
-            throw new InvalidOperationException("Version element not found or invalid in the XML.");
+                Arguments = new ProcessArgumentBuilder()
+                    .Append($"prepare-release")
+            });
         }
         private void CommitChanges(BuildContext context)
         {
