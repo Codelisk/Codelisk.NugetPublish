@@ -27,9 +27,9 @@ public class BuildContext : FrostingContext
             context.Environment.WorkingDirectory = dir;
         }
 
-        var test = this.GitVersioningGetVersion();
-        ReleaseVersion = this.GitVersioningGetVersion().NuGetPackageVersion;
-        Log.Information("NUGET PACKAGE VERSION: " + ReleaseVersion);
+        //var test = this.GitVersioningGetVersion();
+        //ReleaseVersion = this.GitVersioningGetVersion().NuGetPackageVersion;
+        //Log.Information("NUGET PACKAGE VERSION: " + ReleaseVersion);
     }
 
 
